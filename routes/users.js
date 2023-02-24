@@ -32,4 +32,33 @@ router.get('/:id', (req, res) => {
     res.send(user);
 });
 
+// Route for adding a new user to the list of users.
+router.use(express.json());
+
+router.post('/', (req, res) => {
+    const user = {
+        name: req.body.name,
+        age: req.body.age
+    }
+    users.push(user);
+    res.send(user);
+});
+
+// Route for updating a user on the list of users.
+router.put('/:id', (req, res) => {
+    const index = req.params.id - 1;
+    const user = users[index];
+    user.name = req.body.name;
+    user.age = req.body.age;
+    res.send(user);
+});
+
+// Route for deleting a user from the list of users.
+router.delete('/:id', (req, res) => {
+    const index = req.params.id - 1;
+    const user = users[index];
+    users.splice(id, 1);
+    res.send(user);
+});
+
 module.exports = router;

@@ -32,4 +32,32 @@ router.get('/:id', (req, res) => {
     res.send(fruit);
 });
 
+// Route for adding a new fruit to the list of fruits.
+router.use(express.json());
+router.post('/', (req, res) => {
+    const fruit = {
+        name: req.body.name,
+        color: req.body.color
+    }
+    fruits.push(fruit);
+    res.send(fruit);
+});
+
+// Route for updating a fruit on the list of fruits.
+router.put('/:id', (req, res) => {
+    const index = req.params.id - 1;
+    const fruit = fruits[index];
+    fruit.name = req.body.name;
+    fruit.color = req.body.color;
+    res.send(fruit);
+});
+
+// Route for deleting a fruit from the list of fruits.
+router.delete('/:id', (req, res) => {
+    const index = req.params.id - 1;
+    const fruit = fruits[index];
+    fruits.splice(id, 1);
+    res.send(fruit);
+});
+
 module.exports = router;
